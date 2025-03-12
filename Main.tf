@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.aws_region  # Change as needed
+  region = "us-east-1"  # Change as needed
 }
 
 resource "aws_vpc" "main_vpc" {
