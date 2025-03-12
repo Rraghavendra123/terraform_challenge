@@ -86,8 +86,8 @@ resource "aws_db_instance" "mysql_db" {
   engine                = "mysql"
   engine_version        = "8.0"
   instance_class        = var.db_instance_class
-  username             = var.
-  password             = var. # Replace with a secure secret manager reference
+  username             = var.db_username
+  password             = var.db_password # Replace with a secure secret manager reference
   publicly_accessible  = false
   skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
