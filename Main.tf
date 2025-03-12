@@ -64,10 +64,24 @@ resource "aws_instance" "web_server" {
   user_data = <<-EOF
               #!/bin/bash
               apt update -y
-              apt install -y apache2
+              apt install -y apache2 mysql-client
+
+              # Start Apache
               systemctl start apache2
               systemctl enable apache2
+
+              # Connect to MySQL and create a database
+              mysql -h ${aws_db_instance.mysql_db.endpoint} -u ${var.db_username} -p${var.db_password} -e "CREATE DATABASE webapp_db;"
+
+              # Create a test table
+              mysql -h ${aws_db_instance.mysql_db.endpoint} -u ${var.db_username} -p${var.db_password} -e "
+              USE webapp_db;
+              CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), email VARCHAR(50));
+              INSERT INTO users (name, email) VALUES ('Raghavendra', 'raghav@example.com');"
+
+              # Display data in the webpage
               echo "<h1>Terraform Deployed Web Server</h1>" > /var/www/html/index.html
+              echo "<p>Database connection established successfully!</p>" >> /var/www/html/index.html
               EOF
 }
 
