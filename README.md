@@ -25,6 +25,32 @@ Ensure you have the following installed:
 - [AWS CLI](https://aws.amazon.com/cli/)
 - AWS IAM credentials with necessary permissions.
 
+##Step 2: Configure AWS Credentials
+Ensure you have AWS credentials configured:
+sh
+aws configure
+
+##Step 3: Initialize Terraform
+Run the following command to initialize Terraform:
+sh
+terraform init
+
+##Step 4: Apply Terraform Configuration
+Run the following command to provision resources:
+sh
+terraform apply -auto-approve
+
+##Step 5: Verify the Deployment
+Get the public IP of the EC2 instance:
+sh
+terraform output ec2_public_ip
+Open a browser and visit http://<EC2_PUBLIC_IP> to verify the web server is running.
+
+Step 6: Destroy the Infrastructure (Optional)
+To clean up resources, run:
+sh
+terraform destroy -auto-approve
+
 ## Usage Instructions
 
 ### Step 1: Clone the Repository
